@@ -2,17 +2,7 @@
 title: "Simplifying Stats Jargon"
 author: "Your Name"
 date: "`r Sys.Date()`"
-output:
-  polish::plenty_html:
-    toc: true           # enable table-of-contents
-    toc_float: true     # set table-of-contents to float next to document
-    code_folding: hide  # initially hide/show code snippets marked echo=TRUE
-    type: inverse       # css style type: 'default' or 'inverse' colors
-    color: purple       # brand color - try: purple, maroon, orange, darkpurple
-    source: null        # link to your source code
-    slack: null         # link to Slack channel - e.g. with !expr polish::url_slack("farmos-support")
-    contact: null       # contact email address
-    show_labels: true   # whether to show navbar icon labels (true/false)
+output: html_document
 ---
 
 ```{r setup, include=FALSE}

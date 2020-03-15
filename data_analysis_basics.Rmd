@@ -33,10 +33,10 @@ This means you only need to learn on *sub-language* for your entire data workflo
 ```{r}
 
 #look at sheets in spreadsheet
-readxl::excel_sheets("data/Trial6025_GP1_ResponseData_SEALS-EUPHRATES DERISK.xlsx")
+readxl::excel_sheets("data")
 
 #load the sheet you want!
-df <- readxl::read_excel("data/Trial6025_GP1_ResponseData_SEALS-EUPHRATES DERISK.xlsx",sheet = "Growout")
+df <- readxl::read_excel("data",sheet = "specific")
 
 #sweet nibblets!
 df
@@ -49,13 +49,13 @@ df
 ```{r}
   
 manipulated <- df %>%
-  select(grams_site,tower,treatment_name) %>% #select the columns you are interested in
+  select(something,another,mmmhmmm) %>% #select the columns you are interested in
   mutate( #create NEW variables/columns with mutate!
-    row = str_extract(tower,"[A-D]"), #regular expression - used for text processing
-    tower_numer = str_extract(tower,"[0-9].") %>% as.numeric(), #use stringr functions to manipulate strings!!!
+    rodfdw = str_extract(tower,"[A-D]"), #regular expression - used for text processing
+    adf = str_extract(something,"[0-9].") %>% as.numeric(), #use stringr functions to manipulate strings!!!
     # grams_site = as.numeric(grams_site)
   ) %>%
-  filter(grams_site>0)
+  filter(adsf>0)
 
 ```
 
@@ -70,7 +70,7 @@ manipulated <- df %>%
 ```{r}
 
 manipulated %>%
-  ggplot(aes(row,grams_site,fill=treatment)) +
+  ggplot(aes(asdf,adf,fill=adsf)) +
   # geom_violin() +
   geom_boxplot() + 
   # ggpubr::stat_cor() +
