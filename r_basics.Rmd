@@ -10,8 +10,10 @@ knitr::opts_chunk$set(echo = TRUE)
 # Variable
 
 ```{r}
-#CMD + Enter is run that line
+#CMD + Enter is the same as saying "run this line"
+#CMD + SHIFT + Enter is the same as saying "run this chunk"
 #This is a variable
+
 x <- 4
 
 ```
@@ -79,7 +81,7 @@ data.frame(col_one = c(1,2,3),col_two=c("A","A","B"))
 
 # Functions
 
-Write your code only once and reuse it whereever! Think of a function as "packaging" you logic and naming it after what the logic does.
+Write your code only once and reuse it wherever! Think of a function as "packaging" you logic and naming it after what the logic does.
 
 ```{r}
 

@@ -11,11 +11,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is a markdown area.
 
-That top part with blue `---` is the YAML part of a .rmd document. It tells it how to be rendered.
+That top part with blue `---` is the YAML part of a .rmd document. It tells it how to be rendered. In this case the output is a `html_document`.
 
 **This** text is markdown. It is a basic way to write text and do *simple* styling.
 
-The part below is a code chunk. Write R there and run with CMD/Ctrl + SHIFT + ENTER.
+The part below (signified by ```{r} <some code> ```is a code chunk. Write R there and run with CMD/Ctrl + SHIFT + ENTER.
 
 ```{r}
 #I'm a CODE CHUNK. Write code here!

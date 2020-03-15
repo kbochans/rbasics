@@ -1,83 +1,67 @@
 ---
-title: "The Tidyverse - A Universe of Coding Happiness and Joy"
+title: "Simplifying Stats Jargon"
+author: "Your Name"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.height = 8, fig.width = 12)
 ```
 
-```{r}
+## Introduction
 
+The following is a quick "helper" to aid in understanding stats jargon.
+
+# Describing Groups - Calculating Descriptive Statistics
+
+Useful ways to describe groups include measures of "center" eg. mean or median and measures of "spread" eg. variance, standard deviation or standard error.
+
+* If you don't think your data is normal
+    - Use standard deviation (describes variation in data). Don't us standard error (describes variation about mean).
+    - Use median because not as effected by funky distributions
+    
+
+```{r}
 library(tidyverse)
+set.seed(123)
+data <- tibble(x = runif(20),y=runif(20),a=rep(c("A","B"),each=10))
 
-#OR load individual packages from the above metapackage
-library(readxl)
-library(dplyr)
-library(tidyr)
-library(stringr) #for dealing with strings
-library(purrr) #for next time... replaces for/while loops
-library(ggplot2)
+desc_table <- data %>%
+  group_by(a) %>%
+  summarise(
+    n = n(),
+    mean = mean(y),
+    sd = sd(y),
+    se = sd/sqrt(n)
+  )
 
+#Note that the se is used to compare means (variation about mean taking into account sample size, so if you have a huuuuuge sample the confidence in the mean shrinks).
+#Also note that se standard deviation is the sqrt of variance which is is the squared sum of diff between points and the mean over n-1 (bessels correction). n subracts one because we know the sample mean and thus can calculate the "last" n.
 
-```
+#There are MANY ways to show the measures of center and variation. This is one way using SUMMARIZE FIRST.
+desc_table %>%
+  ggplot(aes(x = a,color=a)) +
+  geom_errorbar(aes(ymin=mean-se,ymax=mean+se)) +
+  geom_point(aes(y=mean),size=3, shape=21, fill="white")
 
-# Why the tidyverse?
-
-Base R functions are not always consistent and clear with what they expect as arguments and what they return. Packages in the `tidyverse` are designed to follow a consitent coding structure and work well together.
-
-This means you only need to learn on *sub-language* for your entire data workflow!
-
-## Import the data
-
-```{r}
-
-#look at sheets in spreadsheet
-readxl::excel_sheets("data")
-
-#load the sheet you want!
-df <- readxl::read_excel("data",sheet = "specific")
-
-#sweet nibblets!
-df
-```
-
-## Manipulate the data!
-
-* The most common useful functions are **filter**, **select** and **mutate**. Don't forget the pipe! **%>%** is the pipe. It is an *infix* function.
-
-```{r}
-  
-manipulated <- df %>%
-  select(something,another,mmmhmmm) %>% #select the columns you are interested in
-  mutate( #create NEW variables/columns with mutate!
-    rodfdw = str_extract(tower,"[A-D]"), #regular expression - used for text processing
-    adf = str_extract(something,"[0-9].") %>% as.numeric(), #use stringr functions to manipulate strings!!!
-    # grams_site = as.numeric(grams_site)
-  ) %>%
-  filter(adsf>0)
-
-```
-
-## Manipulate the data!
-
-* ggplot works in **layers**. You add a layer with a `+`.
-
-* Think about putting your response variable on the **y-axis** and looking at how it varies when categorized differently by using **x-axis**, **color** or maybe **size** or **facetting**.
-
-* Graphing is a complicated business!!! There are TONS of ways to do things and change visuals. [stackoverflow](https://stackoverflow.com/) is you **best friend**. Also use the ? mark eg. `?ggplot`.
-
-```{r}
-
-manipulated %>%
-  ggplot(aes(asdf,adf,fill=adsf)) +
+#This is one way using SUMMARIZE IN GGPLOT2.
+#TIP: use CMD + click on function to get the details..eg. for mean_se
+data %>%
+  ggplot(aes(x = a,color=a,fill=a,y=y)) +
   # geom_violin() +
-  geom_boxplot() + 
-  # ggpubr::stat_cor() +
-  geom_blank()
+  stat_summary(fun.y = median, geom = "point",shape=23,size=3) +
+  stat_summary(fun.y = mean, geom = "point") +
+  stat_summary(fun.data = mean_se, geom = "errorbar")
+
+#NOTE: comparing using means and errorbars requires NORMAL DISTRIBUTION.
 
 ```
 
-## Where Next?
+# Comparing Groups
 
-[R for Data Science](https://r4ds.had.co.nz/) is a phenomenal resource!!!!!!!!!!!!!!1
+The mean is a very popular number used to compare groups.
+
+Unbiased Sample Variance
+$$s_{N - 1} = \sqrt {\frac{1}{{N - 1}}\sum\limits_{i = 1}^N {\left( {x_i - \bar x} \right)^2 } }$$
