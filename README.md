@@ -28,7 +28,8 @@ Explore the following files in the suggested order.
   
 1. [The Basics of Data Preparation with R](data_preparation_basics.Rmd) - Not very complete.. need data
   - Learn why you should probably use a meta-package called `Tidyverse` instead of base R. Yes I'm biased.
-  - Also this is the **most** critical step of anything data.     - Most peoples problems are not that they can't analyze their data, its that they can't even get it into a useable format.
+  - Also this is the **most** critical step of anything data. 
+  - Most peoples problems are not that they can't analyze their data, its that they can't even get it into a useable format *in order to* analyze it.
   
 1. [The Basics of Data Analysis with R ](data_analysis_basics.Rmd) - Not very complete
   - Some basics for describing your data and making comparisons with it.
