@@ -1,0 +1,122 @@
+---
+title: "First Steps - Variables, Vectors and Functions"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Variable
+
+```{r}
+#CMD + Enter is run that line
+#This is a variable
+x <- 4
+
+```
+
+# Vectors
+
+The most important data type in R.
+
+```{r}
+
+#YOUR BASIC STRUCTURES
+#atomic vectors
+logical_var_maybe <- c(TRUE, FALSE,5,"im the complexiest")
+
+c(TRUE,FALSE,5,"idks") #has to be same data type
+
+int_var <- c(1L, 6L, 10L)
+dbl_var <- c(1, 2.5, 4.5) #double
+character_var <- c("these are", "some strings")
+
+#check type
+typeof(logical_var)
+
+#check structure
+str(logical_var_maybe)
+
+#not atomic
+#lists
+#why a list?  Because you can put different data types in it
+list(TRUE, FALSE,5,"im the complexiest")
+
+my_list <- list(first_item = c("ham","eggs","turkey"),second_item = 2)
+
+my_list$first_item
+
+
+example_list <- list(logical_maybe = logical_var_maybe,integers = int_var,some_doubles_yo = dbl_var)
+
+str(example_list)
+
+#MORE COMPLEX STRUCTURES
+#just add attributes
+#this creates S3 vectors AKA add a class attribute (S3 object system) to "define" more complex data structures
+
+#dataframes are the most important data structure in R
+#good for dealing with rectangular data aka for statistics
+#basically a bunch of lists of the same length
+df <- data.frame(integers = int_var,some_doubles_yo = dbl_var)
+attributes(df)
+
+#JUST USE a TIBBLE (does less, complains more)
+tb <- tibble::tibble(integers = int_var,some_doubles_yo = dbl_var)
+
+#notice the attributes
+attributes(tb)
+
+
+#most basic
+c(1,2,3)
+#more complex
+list(1,"4")
+#most complex - rectangular data = good for stats
+data.frame(col_one = c(1,2,3),col_two=c("A","A","B"))
+```
+
+# Functions
+
+Write your code only once and reuse it whereever! Think of a function as "packaging" you logic and naming it after what the logic does.
+
+```{r}
+
+print_arg <- function(print_this){
+  print(paste(print_this,", yea buddy!!!!!"))
+}
+
+print_arg("I ate a pizza")
+print_arg("I ate a popsicle")
+
+add_x_and_y <- function(x,y){
+  x-y
+}
+
+add_x_and_y(4,3)
+
+#function parts
+formals(add_x_and_y)
+body(add_x_and_y)
+environment(add_x_and_y)
+
+#the arguments (formals)
+# arguments are determined by position.. also can be via name
+first_arg <- 4
+second_arg <- 3
+add_x_and_y(first_arg,second_arg)
+add_x_and_y(y=first_arg,x=second_arg)
+
+#environment
+#when your function runs it looks inside the function environment first, then the global environment
+add_x_and_y <- function(x,y){
+  x <- 0
+  x-y
+}
+
+add_x_and_y(y=4,x=3)
+
+
+```
+

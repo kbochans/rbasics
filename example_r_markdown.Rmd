@@ -1,0 +1,26 @@
+---
+title: "This is a Basic Example"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+This is a markdown area.
+
+That top part with blue `---` is the YAML part of a .rmd document. It tells it how to be rendered.
+
+**This** text is markdown. It is a basic way to write text and do *simple* styling.
+
+The part below is a code chunk. Write R there and run with CMD/Ctrl + SHIFT + ENTER.
+
+```{r}
+#I'm a CODE CHUNK. Write code here!
+print("Hey")
+```
+
+If you click the `Knit` button up top it will render this into an `html_document`.
+

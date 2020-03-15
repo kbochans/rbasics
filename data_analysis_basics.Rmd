@@ -1,0 +1,83 @@
+---
+title: "The Tidyverse - A Universe of Coding Happiness and Joy"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+library(tidyverse)
+
+#OR load individual packages from the above metapackage
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(stringr) #for dealing with strings
+library(purrr) #for next time... replaces for/while loops
+library(ggplot2)
+
+
+```
+
+# Why the tidyverse?
+
+Base R functions are not always consistent and clear with what they expect as arguments and what they return. Packages in the `tidyverse` are designed to follow a consitent coding structure and work well together.
+
+This means you only need to learn on *sub-language* for your entire data workflow!
+
+## Import the data
+
+```{r}
+
+#look at sheets in spreadsheet
+readxl::excel_sheets("data/Trial6025_GP1_ResponseData_SEALS-EUPHRATES DERISK.xlsx")
+
+#load the sheet you want!
+df <- readxl::read_excel("data/Trial6025_GP1_ResponseData_SEALS-EUPHRATES DERISK.xlsx",sheet = "Growout")
+
+#sweet nibblets!
+df
+```
+
+## Manipulate the data!
+
+* The most common useful functions are **filter**, **select** and **mutate**. Don't forget the pipe! **%>%** is the pipe. It is an *infix* function.
+
+```{r}
+  
+manipulated <- df %>%
+  select(grams_site,tower,treatment_name) %>% #select the columns you are interested in
+  mutate( #create NEW variables/columns with mutate!
+    row = str_extract(tower,"[A-D]"), #regular expression - used for text processing
+    tower_numer = str_extract(tower,"[0-9].") %>% as.numeric(), #use stringr functions to manipulate strings!!!
+    # grams_site = as.numeric(grams_site)
+  ) %>%
+  filter(grams_site>0)
+
+```
+
+## Manipulate the data!
+
+* ggplot works in **layers**. You add a layer with a `+`.
+
+* Think about putting your response variable on the **y-axis** and looking at how it varies when categorized differently by using **x-axis**, **color** or maybe **size** or **facetting**.
+
+* Graphing is a complicated business!!! There are TONS of ways to do things and change visuals. [stackoverflow](https://stackoverflow.com/) is you **best friend**. Also use the ? mark eg. `?ggplot`.
+
+```{r}
+
+manipulated %>%
+  ggplot(aes(row,grams_site,fill=treatment)) +
+  # geom_violin() +
+  geom_boxplot() + 
+  # ggpubr::stat_cor() +
+  geom_blank()
+
+```
+
+## Where Next?
+
+[R for Data Science](https://r4ds.had.co.nz/) is a phenomenal resource!!!!!!!!!!!!!!1
