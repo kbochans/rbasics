@@ -24,3 +24,5 @@ print("Hey")
 
 If you click the `Knit` button up top it will render this into an `html_document`.
 
+Double-click on the `example_r_markdown.html` that shows up in your `Files` viewer window (usually to the right on the default RStudio configuration).
+
