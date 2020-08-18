@@ -11,8 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 #CMD + Enter is the same as saying "run this line"
-#CMD + SHIFT + Enter is the same as saying "run this chunk"
-#This is a variable
+#CMD + SHIFT + Enter is the same as saying "run this chunk". A chunk is defined as the space inside ```{r} space ```
+
+#This x is a variable
 
 x <- 4
 

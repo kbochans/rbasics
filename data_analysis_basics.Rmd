@@ -55,7 +55,7 @@ data %>%
   stat_summary(fun.y = mean, geom = "point") +
   stat_summary(fun.data = mean_se, geom = "errorbar")
 
-#NOTE: comparing using means and errorbars requires NORMAL DISTRIBUTION.
+#NOTE: comparing using means and errorbars requires a NORMAL DISTRIBUTION. Usually if you have more than 30 samples in each group you are comparing it is safe to assume normality because of the Central Limit Theorem.
 
 ```
 
